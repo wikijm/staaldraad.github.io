@@ -1,13 +1,30 @@
-# Site settings
-title: Staaldraad.io
-email: etienne@sensepost.com
-description: > # this means to ignore newlines until "baseurl:"
-	Personal blog about infosec, networks and anything that interests me.
-	Includes research and a few interesting things from my day job.
-baseurl: "" 
-url: "https://staaldraad.github.io" # the base hostname & protocol for your site
-twitter_username: kamp_staaldraad 
-github_username:  staaldraad
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
-# Build settings
+paginate: 10 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: pygments
 markdown: kramdown
+
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: Staaldraad 
+
+description: About infosec, botnets, networks and things
+author:
+  name: Staaldraad
+  email: etienne@sensepost.com
+  github: staaldraad
+  twitter: kamp_staaldraad
+  linkedin: https://uk.linkedin.com/in/etiennestalmans 
+  bio: Security analyst and researcher
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+
+BASE_PATH:
