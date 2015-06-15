@@ -2,29 +2,28 @@
 
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
-exclude: ["README.md"] # files to exclude
 highlighter: pygments
 markdown: kramdown
 
+permalink: pretty
+relative_permalinks: true
 
-defaults:
-  -
-    scope:
-      path: "" # empty string for all files
-    values:
-      title: Staaldraad 
+title: Staaldraad.io 
+tagline: 'Infosec, botnets, broken things'
+description: 'About infosec, botnets, networks and things'
+url: 'https://staaaldraad.github.io'
+baseurl: /
 
-description: About infosec, botnets, networks and things
 author:
-  name: Staaldraad
+  name: 'Etienne Stalmans'
   email: etienne@sensepost.com
-  github: staaldraad
   twitter: _staaldraad 
-  linkedin: https://uk.linkedin.com/in/etiennestalmans 
   bio: Security analyst and researcher
+
+github: 
+    repo: https://github.com/staaldraad
 
 rss_path: feed.xml
 categories_path: categories.html
 tags_path: tags.html
 
-BASE_PATH:
