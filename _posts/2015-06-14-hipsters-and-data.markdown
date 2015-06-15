@@ -7,6 +7,7 @@ categories: databases security nosql
 A while back I spent some time playing with the “modern” database implementations, more affectionately known as hipster tech. These are mostly your so-called NoSQL, big-data, ect databases. Trying to interact with these databases required numerous scripts to be written, one for each database implementation.  After chatting to [@PaulWebSec][paultw] I decided to merge these into a single tool. Thus [HippyDB Tool][hippydb] was born.
 
 The following databases are supported:
+
 * Aerospike
 * Cassandra
 * Hbase
