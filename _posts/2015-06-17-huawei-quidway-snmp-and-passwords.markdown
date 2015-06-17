@@ -22,5 +22,5 @@ The tool can be found here:
 
 Happy router/firewall hunting!
 
-As an added bonus, a script to decrypt passwords stored in Huawei config files (older configs used a known key and DES encryption). [Huawei Decrypt]({https://gist.github.com/staaldraad/605a5e40abaaa5915bc7})
+As an added bonus, a script to decrypt passwords stored in Huawei config files (older configs used a known key and DES encryption). Just another python script: [Huawei Decrypt]({https://gist.github.com/staaldraad/605a5e40abaaa5915bc7})
 
