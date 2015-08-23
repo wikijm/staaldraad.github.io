@@ -29,7 +29,7 @@ $ zip --symlinks -r /tmp/archive.zip /tmp/links
 
 Now it's simply a matter of uploading our .zip file and having it converted to a format that doesn't contain symlink support. 
 
-![Use online converter](assets/conv_zip_to_rar.png)
+![Use online converter](assets/conv_zip_rar.png)
 
 The converted file can then be downloaded, un-archived and the contents viewed. The conversion process resulted in the server-side files being included in the newly created archive. Giving us arbitrary file read on the server. This would be limited by file-permissions and an attacker having to know the full path to files on the server.
 
