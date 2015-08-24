@@ -29,11 +29,11 @@ $ zip --symlinks -r /tmp/archive.zip /tmp/links
 
 Now it's simply a matter of uploading our .zip file and having it converted to a format that doesn't contain symlink support. 
 
-![Use online converter](assets/conv_zip_rar.png)
+![Use online converter](/assets/conv_zip_rar.png)
 
 The converted file can then be downloaded, un-archived and the contents viewed. The conversion process resulted in the server-side files being included in the newly created archive. Giving us arbitrary file read on the server. This would be limited by file-permissions and an attacker having to know the full path to files on the server.
 
-![Unrar and view contents](assets/viewlinks.png)
+![Unrar and view contents](/assets/viewlinks.png)
 
 Another edge case that exists is symlinking a directory. Try symlink something like /tmp and see what happens, this has worked against FreeBSD hosts. Which could significanlty increase pwnage.
 This is a pretty simple attack and it's always worth-while checking whether services that allow .zip (and similar formats) to be uploaded, actually extract the file contents on the server-side and use these in later actions. If files are extracted and echoed back in anyway we have arbitrary file read, if the files are actually altered, it may result in a denial of service attack, if critical files are overwritten. 
