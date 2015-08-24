@@ -35,6 +35,7 @@ The converted file can then be downloaded, un-archived and the contents viewed. 
 
 ![Unrar and view contents](assets/viewlinks.png)
 
+Another edge case that exists is symlinking a directory. Try symlink something like /tmp and see what happens, this has worked against FreeBSD hosts. Which could significanlty increase pwnage.
 This is a pretty simple attack and it's always worth-while checking whether services that allow .zip (and similar formats) to be uploaded, actually extract the file contents on the server-side and use these in later actions. If files are extracted and echoed back in anyway we have arbitrary file read, if the files are actually altered, it may result in a denial of service attack, if critical files are overwritten. 
 
 *Disclaimer* The above conversion provider was contacted about this behaviour and they acknowledged the risk and accepted it as each conversion was being done in a newly spawned docker container. 
