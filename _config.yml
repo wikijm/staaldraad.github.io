@@ -6,9 +6,8 @@ highlighter: pygments
 markdown: kramdown
 
 permalink: pretty
-relative_permalinks: true
 
-title: Staaldraad.io 
+title: Staaldraad.io
 tagline: 'Infosec, botnets, broken things'
 description: 'About infosec, botnets, networks and things'
 url: 'https://staaaldraad.github.io'
@@ -17,10 +16,10 @@ baseurl: /
 author:
   name: 'Etienne Stalmans'
   email: etienne@sensepost.com
-  twitter: _staaldraad 
+  twitter: _staaldraad
   bio: Security analyst and researcher
 
-github: 
+github:
     repo: https://github.com/staaldraad
 
 rss_path: feed.xml
