@@ -75,6 +75,7 @@ go run tcpprox.go -l 127.0.0.1 -p 80 -r google.com:80
 ```
 
 Our options are,
+
 ```
 -l local IP address to listen on
 -p local port to listen on
