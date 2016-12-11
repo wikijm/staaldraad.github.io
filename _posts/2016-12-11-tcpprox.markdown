@@ -84,7 +84,13 @@ Our options are,
 
 Using tcpprox in TLS mode:
 
-You'll need to generate a valid TLS certifcate here, the easiest is to use the following commands with OpenSSL:
+You can simply start tcpprox with the ```-s``` to signal that it should use TLS. By default tcpprox will generate a certificate for the session:
+
+```
+go run tcpprox.go -s -l 127.0.0.1 -p 443 -r google.com:443
+```
+
+If you want to use a custom certificate, you'll need to generate a valid TLS certifcate here, and name it server.{key,crt} as I'm lazy. The easiest is to use the following commands with OpenSSL:
 
 ```
 openssl genrsa -out server.key 2048 openssl req -new -x509 -key server.key -out server.pem -days 365
@@ -94,12 +100,6 @@ Then convert it to DER format:
 
 ```
 openssl x509 -in server.pem -out server.crt -outform der
-```
-
-Now you can simply start tcpprox with the ```-s``` to signal that it should use TLS:
-
-```
-go run tcpprox.go -s -l 127.0.0.1 -p 443 -r google.com:443
 ```
 
 Finally you have the option of specifying everything in a config file and tcpprox will use these options to automatically generate a TLS certificate for you, ect ect.
