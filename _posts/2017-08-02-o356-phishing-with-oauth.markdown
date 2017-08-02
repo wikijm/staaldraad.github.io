@@ -58,7 +58,7 @@ The last thing to setup is the actual *redirect url* application; this is where 
 
 For this I've written a bit of Go (sorry, I thought about re-coding this into Python and then got over it..)
 
-![Redirect Application](https://gist.github.com/staaldraad/d4f8b6ed20adbf21e45835bb046d14ca)
+[Redirect Application](https://gist.github.com/staaldraad/d4f8b6ed20adbf21e45835bb046d14ca)
 
 There are a few parts to change, namely *client_id*, *scope* and *redirect_url* (I've commented these in the code). The application will be served over HTTPS and uses your *cert.pem* and *cert.key*. These should be valid for your domain and it's up to you where you get them.
 
