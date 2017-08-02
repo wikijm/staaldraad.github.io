@@ -99,3 +99,13 @@ A few quick examples, how about retrieving the messages and listing their subjec
 The API also allows for search, so you could search for juicy info, such as passwords. Use: **https://outlook.office.com/api/v2.0/me/messages?search="password"**
 
 ![Show emails containing the word *password*](/assets/oauth_phishing_interact_with_mail2.png)
+
+# Fin
+
+There are a bunch of attack options available here, with the graph API providing a ton of interesting functionality. How you choose to use this is completely up to you. I find it to be a nice means for gaining a foothold, you could even start sending mail using the compromised account (if you requested the correct permission set).
+
+## Fix
+
+This is very similar to the OAuth issue that affected [Google Apps not too long ago](https://arstechnica.com/information-technology/2017/05/dont-trust-oauth-why-the-google-docs-worm-was-so-convincing/). That incident, as mentioned in the linked article, was particularly successful as it presented users with a valid interface, and no indication that something was amiss. The same steps should be taken here to make it clear to users that this is a third-party app requesting access. I guess this is probably worm-able as well. For the curious, "Live" accounts get a slightly better dialog. At least it displays the "app publisher webpage" (in this case an IP address)
+
+![Live dialog](/assets/oauth_phishing_live_perms.png)
